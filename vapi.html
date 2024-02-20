@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <style>
+        body
+        {
+            background-color: #a7a7a7;
+        }
+    </style>
+    <title>Parv's VAPI Test Page</title>
+    
+
+</head>
+<body>
+<h1> Welcome to Parv's VAPI Test Page </h1>
+
+
+<p>
+        Use this page to try VAPI APIs!
+</p>    
+<!--Ajax enablement -->
+<script
+src="https://code.jquery.com/jquery-3.3.1.min.js"
+integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+crossorigin="anonymous">
+</script>
+<!-- End Ajax enablement script -->
+
+<script>
+    function JSFunction() {
+      $.ajax({
+          async: false,
+          url: "/phonecall",
+          data: {
+                "phone_number": document.getElementById('phone').value
+          },
+          type: "POST", // if you want to send data via the "data" property change this to "POST". This can be omitted otherwise
+          success: function(retURL) {
+               window.location.href = retURL;
+              //alert(responseData);
+              //document.getElementById("checkoutdetails").innerHTML = '<h3>Your API has been processed!</h3>'
+          },
+          error: console.error
+      });
+    };
+    
+    </script>
+    
+    <form>
+        Enter your phone number: <input type="tel" id="phone" name="phone" pattern="[+]{1}[0-9]{11,14}" required>
+        <input type = "button" onclick = "JSFunction()" value = "Call">
+        </form>
+       
+
+
+
+</body>
+</html>
