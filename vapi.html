@@ -2,58 +2,91 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
+    <title>Parv's VAPI Test Page</title>
     <style>
-        body
-        {
+        body {
             background-color: #a7a7a7;
+            font-family: Arial, sans-serif;
+            font-size: 16px;
+            line-height: 1.6;
+            margin: 0;
+            padding: 0;
+        }
+        
+        .container {
+            max-width: 600px;
+            margin: 50px auto;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 10px;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+            text-align: center;
+        }
+        
+        h1 {
+            font-size: 24px;
+            margin-bottom: 20px;
+        }
+        
+        p {
+            font-size: 18px;
+            margin-bottom: 20px;
+        }
+        
+        input[type="tel"] {
+            width: calc(100% - 50px);
+            height: 40px;
+            padding: 10px;
+            font-size: 16px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            margin-bottom: 20px;
+        }
+        
+        .phone-icon {
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            border-radius: 50%;
+            width: 50px;
+            height: 50px;
+            font-size: 24px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+        
+        .phone-icon:hover {
+            background-color: #0056b3;
         }
     </style>
-    <title>Parv's VAPI Test Page</title>
-    
-
 </head>
 <body>
-<h1> Welcome to Parv's VAPI Test Page </h1>
-
-
-<p>
-        Use this page to try VAPI APIs!
-</p>    
-<!--Ajax enablement -->
-<script
-src="https://code.jquery.com/jquery-3.3.1.min.js"
-integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
-crossorigin="anonymous">
-</script>
-<!-- End Ajax enablement script -->
-
-<script>
-    function JSFunction() {
-      $.ajax({
-          async: false,
-          url: "/phonecall",
-          data: {
-                "phone_number": document.getElementById('phone').value
-          },
-          type: "POST", // if you want to send data via the "data" property change this to "POST". This can be omitted otherwise
-          success: function(retURL) {
-               window.location.href = retURL;
-              //alert(responseData);
-              //document.getElementById("checkoutdetails").innerHTML = '<h3>Your API has been processed!</h3>'
-          },
-          error: console.error
-      });
-    };
-    
-    </script>
-    
-    <form>
-        Enter your phone number: <input type="tel" id="phone" name="phone" pattern="[+]{1}[0-9]{11,14}" required>
-        <input type = "button" onclick = "JSFunction()" value = "Call">
+    <div class="container">
+        <h1>Welcome to Parv's VAPI Test Page</h1>
+        <p>Use this page to try VAPI APIs!</p>
+        
+        <form id="phoneForm">
+            <input type="tel" id="phone" name="phone" pattern="[+]{1}[0-9]{11,14}" placeholder="Enter your phone number" required>
+            <button type="button" class="phone-icon" onclick="JSFunction()">&#x1F4DE</button>
         </form>
-       
-
-
-
+    </div>
+    
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+    <script>
+        function JSFunction() {
+            $.ajax({
+                async: false,
+                url: "/phonecall",
+                data: {
+                    "phone_number": document.getElementById('phone').value
+                },
+                type: "POST",
+                success: function(retURL) {
+                    window.location.href = retURL;
+                },
+                error: console.error
+            });
+        }
+    </script>
 </body>
 </html>
